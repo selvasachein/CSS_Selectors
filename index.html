@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CSS Selectors Interactive Demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+
+body{
+  margin:0;
+  min-height:100vh;
+  background:#eef2ff;
+  padding-bottom:60px;
+}
+
+header{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding:10px 20px;
+  background:#ffffff;
+  border-bottom:3px solid #6366f1;
+}
+header img{height:55px}
+header h2{margin:0;color:#1e3a8a}
+
+.app{display:flex;height:calc(100vh - 120px)}
+
+.controls{
+  width:340px;
+  padding:15px;
+  background:#f0f9ff;
+  border-right:2px solid #c7d2fe;
+}
+
+.controls h1{font-size:20px;color:#1e40af}
+.section-title{
+  margin-top:15px;
+  font-weight:bold;
+  border-bottom:2px solid #fdba74;
+}
+
+button{
+  width:100%;
+  padding:8px;
+  margin:6px 0;
+  border:none;
+  border-radius:8px;
+  background:#4f46e5;
+  color:#fff;
+  cursor:pointer;
+}
+
+.demo-area{
+  flex:1;
+  padding:20px;
+}
+
+.stage{
+  background:#fff;
+  border:3px dashed #6366f1;
+  border-radius:12px;
+  padding:15px;
+}
+
+.box{border:1px solid #cbd5e1;padding:8px;margin:6px 0}
+.special{background:white}
+
+
+.container span{
+  padding:4px;
+  border:1px solid #94a3b8;
+  display:inline-block;
+  margin:2px;
+}
+
+.stage.element p{background:#bae6fd}
+.stage.class .special{background:#bbf7d0}
+.stage.id #unique{background:#fecaca}
+.stage.group h3,
+.stage.group h4{background: cyan;}
+.stage.desc .container span{background:#fde68a}
+.stage.child .container > span{background:#c7d2fe}
+.stage.attr input[type="text"]{border:3px solid #22c55e}
+
+pre{
+  background:#0f172a;
+  color:#e5e7eb;
+  padding:10px;
+  border-radius:8px;
+  font-size:14px;
+}
+footer{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  text-align:center;
+  padding:10px;
+  color:#fff;
+  background:#1e3a8a;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <img src="logo.png" title="Saveetha Engineering College">
+  <h2>CSS Selectors Interactive Demo</h2>
+</header>
+
+<div class="app">
+
+<div class="controls">
+<h1>Selectors</h1>
+
+<div class="section-title">Basic</div>
+<button onclick="show('element')">Element Selector</button>
+<button onclick="show('class')">Class Selector</button>
+<button onclick="show('id')">ID Selector</button>
+
+<div class="section-title">Combinators</div>
+<button onclick="show('group')">Group Selector</button>
+<button onclick="show('desc')">Descendant Selector</button>
+<button onclick="show('child')">Child Selector</button>
+
+<div class="section-title">Advanced</div>
+<button onclick="show('attr')">Attribute Selector</button>
+</div>
+
+<div class="demo-area">
+
+<div class="stage" id="stage">
+  <div class="box">
+    <p>Paragraph</p>
+  </div>
+  <div class="box special">Class Example</div>
+  <div class="box" id="unique">ID Example</div>
+
+  <div class="box">
+    <h3>H3</h3>
+    <h4>H4</h4>
+  </div>
+
+  <div class="box">
+    <div class="container">
+      <span>Span</span>
+      <div><span>Nested</span></div>
+    </div>
+  </div>
+
+  <div class="box">
+    <input type="text">
+    <input type="password">
+  </div>
+</div>
+
+<h3>Minimal HTML & CSS</h3>
+<pre id="code">Click a selector button</pre>
+
+</div>
+</div>
+
+<footer>
+© 2025 | Designed & Developed by <strong>Dr. R. Selvakumar</strong>
+</footer>
+
+<script>
+const stage=document.getElementById("stage");
+const code=document.getElementById("code");
+
+function show(type){
+  stage.className="stage "+type;
+
+  const examples={
+    element:
+`<!-- HTML -->
+<p>Paragraph</p>
+
+<!-- CSS -->
+p{
+  background: lightblue;
+}`,
+
+    class:
+`<!-- HTML -->
+<div class="special">Class Example</div>
+
+<!-- CSS -->
+.special{
+  background: lightgreen;
+}`,
+
+    id:
+`<!-- HTML -->
+<div id="unique">ID Example</div>
+
+<!-- CSS -->
+#unique{
+  background: lightcoral;
+}`,
+
+    group:
+`<!-- HTML -->
+<h3>Heading</h3>
+<h4>Heading</h4>
+
+<!-- CSS -->
+h3, h4{
+  background: cyan;
+}`,
+
+    desc:
+`<!-- HTML -->
+<div class="container">
+  <span>Item</span>
+  <div><span>Nested</span></div>
+</div>
+
+<!-- CSS -->
+.container span{
+  background: yellow;
+}`,
+
+    child:
+`<!-- HTML -->
+<div class="container">
+  <span>Item</span>
+  <div><span>Nested</span></div>
+</div>
+
+<!-- CSS -->
+.container > span{
+  background: lavender;
+}`,
+
+    attr:
+`<!-- HTML -->
+<div class="box">
+    <input type="text">
+    <input type="password">
+  </div>
+
+<!-- CSS -->
+input [type = "text"] {
+  border: 3px solid green;
+}`
+  };
+
+  code.textContent=examples[type];
+}
+</script>
+
+</body>
+</html>
